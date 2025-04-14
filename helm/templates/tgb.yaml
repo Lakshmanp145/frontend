@@ -8,3 +8,4 @@ spec:
     name: awesome-service # route traffic to the awesome-service
     port: 80
   targetGroupARN: {{ .Values.tgb.arn }} 
+  targetType: ip
