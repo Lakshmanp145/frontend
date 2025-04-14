@@ -1,5 +1,5 @@
 deployment:
-  imageVersion: 1.3.0
+  imageVersion: IMAGE_VERSION
   imageURL: 503561459301.dkr.ecr.us-east-1.amazonaws.com/expense/prod/backend
 tgb:
   arn: arn:aws:elasticloadbalancing:us-east-1:503561459301:targetgroup/expense-prod/4eae985c5c2abd9c
