@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: lakshman143/frontend:{{ .Values.deployment.imageVersion}}
+        image: "{{ .Values.deployment.imageURL }}:{{ .Values.deployment.imageVersion}}"
         resources:
           requests:
             cpu: "64m"
