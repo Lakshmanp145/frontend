@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: expense
+  labels:
+    project: expense
+    app: frontend
+    tier: web
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      project: expense
+      app: frontend
+      tier: web
+  template:
+    metadata:
+      labels: 
+        project: expense
+        app: frontend
+        tier: web
+    spec:
+      containers:
+      - name: frontend
+        image: lakshman143/frontend:{{ .Values.deployment.imageVersion}}
+        resources:
+          requests:
+            cpu: "64m"
+            memory: "250Mi"
+          limits:
+            cpu: "128m"
+            memory: "500Mi"
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: nginx
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+          readOnly: true
+      volumes:
+      - name: nginx
+        configMap:     
+          name: nginx
+          items:
+            - key: nginx.conf
+              path: nginx.conf
