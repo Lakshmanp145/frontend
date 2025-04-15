@@ -1,6 +1,6 @@
 deployment:
   imageVersion: IMAGE_VERSION
-  imageURL: 503561459301.dkr.ecr.us-east-1.amazonaws.com/expense/prod/backend
+  imageURL: 503561459301.dkr.ecr.us-east-1.amazonaws.com/expense/prod/frotend
 tgb:
   arn: arn:aws:elasticloadbalancing:us-east-1:503561459301:targetgroup/expense-prod/3e030374a052a8da
 hpa:  
