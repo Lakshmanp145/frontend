@@ -9,7 +9,7 @@ metadata:
     tier: web
     project: expense
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: frontend
