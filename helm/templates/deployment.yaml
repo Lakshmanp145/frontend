@@ -30,7 +30,7 @@ spec:
             - key: nginx.conf
               path: nginx.conf
       containers:
-      - name: nginx
+      - name: frontend
         image: "{{ .Values.deployment.imageURL }}:{{ .Values.deployment.imageVersion }}"
         resources:
           # soft limit
