@@ -3,45 +3,48 @@ kind: Deployment
 metadata:
   name: frontend
   namespace: expense
+  # labels of deployment resource
   labels:
-    project: expense
     app: frontend
     tier: web
-spec: 
-  replicas: 1
+    project: expense
+spec:
+  replicas: 2
   selector:
     matchLabels:
-      project: expense
       app: frontend
       tier: web
+      project: expense
   template:
     metadata:
-      labels: 
-        project: expense
+      labels:
         app: frontend
         tier: web
+        project: expense
     spec:
+      volumes:
+      - name: nginx
+        configMap:
+          name: nginx
+          items:
+            - key: nginx.conf
+              path: nginx.conf
       containers:
-      - name: frontend
-        image: "{{ .Values.deployment.imageURL }}:{{ .Values.deployment.imageVersion}}"
+      - name: nginx
+        image: "{{ .Values.deployment.imageURL }}:{{ .Values.deployment.imageversion }}"
         resources:
+          # soft limit
           requests:
-            cpu: "64m"
-            memory: "250Mi"
+            memory: "68Mi"
+            cpu: "100m"
+          # hard limit
           limits:
-            cpu: "128m"
-            memory: "500Mi"
+            memory: "128Mi"
+            cpu: "150m"
         ports:
         - containerPort: 8080
-      #   volumeMounts:
-      #   - name: nginx
-      #     mountPath: /etc/nginx/nginx.conf
-      #     subPath: nginx.conf
-      #     readOnly: true
-      # volumes:
-      # - name: nginx
-      #   configMap:     
-      #     name: nginx
-      #     items:
-      #       - key: nginx.conf
-      #         path: nginx.conf
+        volumeMounts:
+        - name: nginx
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+          readOnly: true
